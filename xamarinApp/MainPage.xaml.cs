@@ -30,8 +30,6 @@ namespace xamarinApp
         public async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             User selectedPhone = e.Item as User;
-            if (selectedPhone != null)
-                await DisplayAlert("Выбранная модель", $"{selectedPhone.title} - {selectedPhone.body}", "ok");
         }
 
         public async void makeRequest(string url)
@@ -47,14 +45,16 @@ namespace xamarinApp
                 ListView listView = new ListView
                 {
                     HasUnevenRows = true,
+                    SeparatorVisibility = SeparatorVisibility.None,
                     ItemsSource = Users,
+                    RowHeight = 200,
                     // Определяем формат отображения данных
                     ItemTemplate = new DataTemplate(() =>
                     {
                         ImageCell imageCell = new ImageCell { TextColor = Color.Black, DetailColor = Color.Gray };
                         imageCell.SetBinding(ImageCell.TextProperty, "title");
                         imageCell.SetBinding(ImageCell.DetailProperty, "body");
-                        imageCell.SetBinding(ImageCell.ImageSourceProperty, "ImagePath");
+                        imageCell.SetBinding(ImageCell.ImageSourceProperty, "ImagePath");       
                         return imageCell;
                     })
                 };
@@ -92,25 +92,26 @@ public class CustomCell : ViewCell
         var image = new Image();
         StackLayout cellWrapper = new StackLayout();
         StackLayout horizontalLayout = new StackLayout();
-        Label left = new Label();
-        Label right = new Label();
+        View containerView = new View();
+        Label title = new Label();
+        Label body = new Label();
 
         //set bindings
-        left.SetBinding(Label.TextProperty, "title");
-        right.SetBinding(Label.TextProperty, "body");
+        title.SetBinding(Label.TextProperty, "title");
+        body.SetBinding(Label.TextProperty, "body");
         image.SetBinding(Image.SourceProperty, "image");
 
         //Set properties for desired design
-        cellWrapper.BackgroundColor = Color.FromHex("#eee");
+        horizontalLayout.BackgroundColor = Color.LightPink;
         horizontalLayout.Orientation = StackOrientation.Horizontal;
-        right.HorizontalOptions = LayoutOptions.EndAndExpand;
-        left.TextColor = Color.Black;
-        right.TextColor = Color.Gray;
+        body.HorizontalOptions = LayoutOptions.EndAndExpand;
+        title.TextColor = Color.Black;
+        body.TextColor = Color.Gray;
 
         //add views to the view hierarchy
         horizontalLayout.Children.Add(image);
-        horizontalLayout.Children.Add(left);
-        horizontalLayout.Children.Add(right);
+        horizontalLayout.Children.Add(title);
+        horizontalLayout.Children.Add(body);
         cellWrapper.Children.Add(horizontalLayout);
         View = cellWrapper;
     }
