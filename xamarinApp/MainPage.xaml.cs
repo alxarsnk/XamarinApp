@@ -29,7 +29,9 @@ namespace xamarinApp
 
         public async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            User selectedPhone = e.Item as User;
+            User selectedUser = e.Item as User;
+            ((ListView)sender).SelectedItem = null;
+            await Navigation.PushAsync(new MyPage(selectedUser));
         }
 
         public async void makeRequest(string url)
@@ -42,22 +44,14 @@ namespace xamarinApp
                 var json = await responseContent.ReadAsStringAsync();
                 ObservableCollection<User> list = JsonConvert.DeserializeObject<ObservableCollection<User>>(json);
                 Users = new List<User>(list);
+
                 ListView listView = new ListView
                 {
                     HasUnevenRows = true,
                     SeparatorVisibility = SeparatorVisibility.None,
                     ItemsSource = Users,
-                    RowHeight = 200,
-                    // Определяем формат отображения данных
-                    ItemTemplate = new DataTemplate(() =>
-                    {
-                        ImageCell imageCell = new ImageCell { TextColor = Color.Black, DetailColor = Color.Gray };
-                        imageCell.SetBinding(ImageCell.TextProperty, "title");
-                        imageCell.SetBinding(ImageCell.DetailProperty, "body");
-                        imageCell.SetBinding(ImageCell.ImageSourceProperty, "ImagePath");       
-                        return imageCell;
-                    })
-                };
+                    ItemTemplate = new DataTemplate(typeof(CustomCell))
+            };
                 listView.ItemTapped += OnItemTapped;
                 this.Content = new StackLayout { Children = { listView } };
             }
@@ -90,29 +84,33 @@ public class CustomCell : ViewCell
     {
         //instantiate each of our views
         var image = new Image();
-        StackLayout cellWrapper = new StackLayout();
         StackLayout horizontalLayout = new StackLayout();
-        View containerView = new View();
-        Label title = new Label();
-        Label body = new Label();
+        Label left = new Label();
+        Label right = new Label();
 
         //set bindings
-        title.SetBinding(Label.TextProperty, "title");
-        body.SetBinding(Label.TextProperty, "body");
+        left.SetBinding(Label.TextProperty, "title");
+        right.SetBinding(Label.TextProperty, "body");
         image.SetBinding(Image.SourceProperty, "image");
 
         //Set properties for desired design
-        horizontalLayout.BackgroundColor = Color.LightPink;
-        horizontalLayout.Orientation = StackOrientation.Horizontal;
-        body.HorizontalOptions = LayoutOptions.EndAndExpand;
-        title.TextColor = Color.Black;
-        body.TextColor = Color.Gray;
+        horizontalLayout.Orientation = StackOrientation.Vertical;
+        Frame frame = new Frame
+        {
+            Content = horizontalLayout,
+            BorderColor = Color.Gray,
+            BackgroundColor = Color.FromHex("#e1e1e1"),
+            CornerRadius = 12
+        };
+        right.HorizontalOptions = LayoutOptions.EndAndExpand;
+        left.TextColor = Color.Black;
+        right.TextColor = Color.Gray;
 
         //add views to the view hierarchy
         horizontalLayout.Children.Add(image);
-        horizontalLayout.Children.Add(title);
-        horizontalLayout.Children.Add(body);
-        cellWrapper.Children.Add(horizontalLayout);
-        View = cellWrapper;
+        horizontalLayout.Children.Add(left);
+        horizontalLayout.Children.Add(right);
+        StackLayout stackLayout = new StackLayout() { Children = { frame }, Padding = 16 };
+        View = stackLayout;
     }
 }
