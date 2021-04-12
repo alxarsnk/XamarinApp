@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Net;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
-
+using System.Windows.Input;
 
 namespace xamarinApp
 {
@@ -20,11 +20,25 @@ namespace xamarinApp
         public MainPage()
         {
             Title = "News";
-            
+
             string jsonlink = @"https://jsonplaceholder.typicode.com/posts";
             makeRequest(jsonlink);
-            
- 
+
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = "Settings",
+                Order = ToolbarItemOrder.Primary,
+                Priority = 0
+            };
+            item.Clicked += settingsCLicked;
+            this.ToolbarItems.Add(item);
+
+
+        }
+
+        public async void settingsCLicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SettingsPage());
         }
 
         public async void OnItemTapped(object sender, ItemTappedEventArgs e)
@@ -51,11 +65,12 @@ namespace xamarinApp
                     SeparatorVisibility = SeparatorVisibility.None,
                     ItemsSource = Users,
                     ItemTemplate = new DataTemplate(typeof(CustomCell))
-            };
+                };
+
                 listView.ItemTapped += OnItemTapped;
                 this.Content = new StackLayout { Children = { listView } };
             }
-            
+
         }
     }
 
@@ -72,6 +87,7 @@ public class Phone
 public class User
 {
     public int userId { get; set; }
+    [SQLite.PrimaryKey, SQLite.AutoIncrement]
     public int id { get; set; }
     public string title { get; set; }
     public string body { get; set; }
