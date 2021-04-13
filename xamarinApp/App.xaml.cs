@@ -16,7 +16,7 @@ namespace xamarinApp
             {
                 if (database == null)
                 {
-                    database = new NoteDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "News.db3"));
+                    database = new NoteDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NewDB.db3"));
 
                 }
                 return database;

@@ -20,9 +20,9 @@ namespace xamarinApp
 
         public async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Article selectedUser = e.Item as Article;
+            Article selectedAtricle = e.Item as Article;
             ((ListView)sender).SelectedItem = null;
-            //await Navigation.PushAsync(new MyPage(selectedUser));
+            await Navigation.PushAsync(new NewsDetail(selectedAtricle));
         }
 
         public async void makeRequest(string url)
@@ -50,25 +50,36 @@ namespace xamarinApp
             }
         }
     }
+}
 
-    public class Article
+public class Article
+{
+    public Source source { get; set; }
+    public string author { get; set; }
+    public string title { get; set; }
+    public string description { get; set; }
+    public string url { get; set; }
+    public string urlToImage { get; set; }
+    public string publishedAt { get; set; }
+    public string content { get; set; }
+    [SQLite.PrimaryKey]
+    public int id
     {
-        public Source source { get; set; }
-        public string author { get; set; }
-        public string title { get; set; }
-        public string description { get; set; }
-        public string url { get; set; }
-        public string urlToImage { get; set; }
-        public string publishedAt { get; set; }
-        public string content { get; set; }      
+        get
+        {
+            return (int)Math.Sqrt(title.GetHashCode() * title.GetHashCode());
+        }
+        set
+        {
+            Math.Sqrt(title.GetHashCode() * title.GetHashCode());
+        }
     }
+}
 
-    public class Source {
-        public string id { get; set; }
-        public string name { get; set; }
-    }
-
-
+public class Source
+{
+    public string id { get; set; }
+    public string name { get; set; }
 }
 
 public class NewsCell : ViewCell
@@ -84,8 +95,8 @@ public class NewsCell : ViewCell
         //set bindings
         left.SetBinding(Label.TextProperty, "title");
         right.SetBinding(Label.TextProperty, "source.name");
-        image.SetBinding(Image.SourceProperty, "image");
-
+        image.SetBinding(Image.SourceProperty, "urlToImage");
+        ForceUpdateSize();
         //Set properties for desired design
         horizontalLayout.Orientation = StackOrientation.Vertical;
         Frame frame = new Frame
@@ -95,7 +106,7 @@ public class NewsCell : ViewCell
             BackgroundColor = Color.FromHex("#e1e1e1"),
             CornerRadius = 12
         };
-        right.HorizontalOptions = LayoutOptions.EndAndExpand;
+        right.HorizontalOptions = LayoutOptions.StartAndExpand;
         left.TextColor = Color.Black;
         right.TextColor = Color.Gray;
 
@@ -107,6 +118,3 @@ public class NewsCell : ViewCell
         View = stackLayout;
     }
 }
-
-//59e4bf72cd8147c39800444c7a29aa27
-//https://newsapi.org/v2/top-headlines?country=ru&category=business&apiKey=59e4bf72cd8147c39800444c7a29aa27

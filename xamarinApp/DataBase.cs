@@ -8,13 +8,22 @@ namespace xamarinApp
 {
     public class NoteDatabase
     {
-        readonly SQLiteAsyncConnection database;
+        SQLiteAsyncConnection database;
 
         public NoteDatabase(string dbPath)
         {
-            database = new SQLiteAsyncConnection(dbPath);
-            database.CreateTableAsync<User>().Wait();
+            CreateDb(dbPath);
         }
+
+        public async void CreateDb(string dbPath)
+        {
+            database = new SQLiteAsyncConnection(dbPath);
+            // wait until first query completed
+            await database.CreateTableAsync<User>();
+            // then execute second create query
+            await database.CreateTableAsync<Article>();
+        }
+
 
         public Task<List<User>> GetNotesAsync()
         {
@@ -44,6 +53,37 @@ namespace xamarinApp
             Console.WriteLine("Delete a note.");
             // Delete a note.
             return database.DeleteAsync(note);
+        }
+
+
+        public Task<List<Article>> GetArticlesAsync()
+        {
+            //Get all articles.
+            return database.Table<Article>().ToListAsync();
+        }
+
+        public Task<Article> GetArticleAsync(int uniqId)
+        {
+            // Get a specific article.
+            return database.Table<Article>()
+                            .Where(i => i.id == uniqId)
+                            .FirstOrDefaultAsync();
+        }
+
+        public Task<int> SaveArticleAsync(Article article)
+        {
+
+            Console.WriteLine($"Save a new article. {article.id}");
+            // Save a new article.
+            return database.InsertAsync(article);
+
+        }
+
+        public Task<int> DeleteArticleAsync(Article article)
+        {
+            Console.WriteLine("Delete a article.");
+            // Delete a article.
+            return database.DeleteAsync(article);
         }
     }
 }
