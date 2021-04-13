@@ -26,7 +26,7 @@ namespace xamarinApp
 
             ToolbarItem item = new ToolbarItem
             {
-                Text = "Settings",
+                Text = "Saved",
                 Order = ToolbarItemOrder.Primary,
                 Priority = 0
             };
@@ -38,7 +38,7 @@ namespace xamarinApp
 
         public async void settingsCLicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SettingsPage());
+            await Navigation.PushAsync(new SavedPage());
         }
 
         public async void OnItemTapped(object sender, ItemTappedEventArgs e)
@@ -76,18 +76,10 @@ namespace xamarinApp
 
 }
 
-public class Phone
-{
-    public string Title { get; set; }
-    public string ImagePath { get; set; }
-    public string Company { get; set; }
-    public int Price { get; set; }
-}
-
 public class User
 {
     public int userId { get; set; }
-    [SQLite.PrimaryKey, SQLite.AutoIncrement]
+    [SQLite.PrimaryKey]
     public int id { get; set; }
     public string title { get; set; }
     public string body { get; set; }

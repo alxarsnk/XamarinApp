@@ -16,7 +16,8 @@ namespace xamarinApp
             {
                 if (database == null)
                 {
-                    database = new NoteDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notes.db3"));
+                    database = new NoteDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "News.db3"));
+
                 }
                 return database;
             }
@@ -26,7 +27,7 @@ namespace xamarinApp
         {
             InitializeComponent();
       
-            MainPage = new NavigationPage( new MainPage());
+            MainPage = new NavigationPage( new SettingsPage());
         }
 
         protected override void OnStart()

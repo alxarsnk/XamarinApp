@@ -22,18 +22,18 @@ namespace xamarinApp
             return database.Table<User>().ToListAsync();
         }
 
-        public Task<User> GetNoteAsync(int id)
+        public Task<User> GetNoteAsync(int uniqId)
         {
             // Get a specific note.
             return database.Table<User>()
-                            .Where(i => i.id == id)
+                            .Where(i => i.id == uniqId)
                             .FirstOrDefaultAsync();
         }
 
         public Task<int> SaveNoteAsync(User note)
         {
            
-                Console.WriteLine("Save a new note.");
+                Console.WriteLine($"Save a new note. {note.id}");
                 // Save a new note.
                 return database.InsertAsync(note);
         

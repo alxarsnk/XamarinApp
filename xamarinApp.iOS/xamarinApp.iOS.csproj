@@ -113,6 +113,12 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\download.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\download.png.imageset\icloud-download-475016-1.png" />
+    <ImageAsset Include="Assets.xcassets\location.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\location.png.imageset\17018819521586787806-512.png" />
+    <ImageAsset Include="Assets.xcassets\temporary.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\temporary.png.imageset\29329-200-1.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -132,5 +138,11 @@
       <Project>{C46ACBA8-FEC2-4FC7-BFA4-DAC236F2A31D}</Project>
       <Name>xamarinApp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\lock.png.imageset\" />
+    <Folder Include="Assets.xcassets\download.png.imageset\" />
+    <Folder Include="Assets.xcassets\location.png.imageset\" />
+    <Folder Include="Assets.xcassets\temporary.png.imageset\" />
   </ItemGroup>
 </Project>
