@@ -119,6 +119,8 @@
     <ImageAsset Include="Assets.xcassets\location.png.imageset\17018819521586787806-512.png" />
     <ImageAsset Include="Assets.xcassets\temporary.png.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\temporary.png.imageset\29329-200-1.png" />
+    <ImageAsset Include="Assets.xcassets\news.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\news.png.imageset\14711.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -144,5 +146,6 @@
     <Folder Include="Assets.xcassets\download.png.imageset\" />
     <Folder Include="Assets.xcassets\location.png.imageset\" />
     <Folder Include="Assets.xcassets\temporary.png.imageset\" />
+    <Folder Include="Assets.xcassets\news.png.imageset\" />
   </ItemGroup>
 </Project>

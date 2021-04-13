@@ -43,6 +43,22 @@ namespace xamarinApp
             };
             locationButton.GestureRecognizers.Add(locationTap);
 
+            var newsTap = new TapGestureRecognizer();
+            newsTap.Tapped += (s, e) =>
+            {
+                Navigation.PushAsync(new NewsPage());
+            };
+            var newsButton = new StackLayout
+            {
+                Children = {
+                    new Image { Source = "news.png", WidthRequest = 24, HeightRequest = 24 },
+                   new Label { Text = "Новости"}
+                },
+                Orientation = StackOrientation.Horizontal,
+                Padding = 4,
+            };
+            newsButton.GestureRecognizers.Add(newsTap);
+
 
             Content = new StackLayout
             {
@@ -57,6 +73,13 @@ namespace xamarinApp
                     new Frame
                     {
                         Content = locationButton,
+                        BorderColor = Color.Gray,
+                        BackgroundColor = Color.FromHex("#e1e1e1"),
+                        CornerRadius = 12
+                    },
+                    new Frame
+                    {
+                        Content = newsButton,
                         BorderColor = Color.Gray,
                         BackgroundColor = Color.FromHex("#e1e1e1"),
                         CornerRadius = 12
