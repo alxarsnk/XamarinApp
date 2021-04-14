@@ -92,6 +92,22 @@ namespace xamarinApp
             };
             shareButton.GestureRecognizers.Add(shareTap);
 
+            var photoTap = new TapGestureRecognizer();
+            photoTap.Tapped += (s, e) =>
+            {
+                Navigation.PushAsync(new PhotoPage());
+            };
+            var photoButton = new StackLayout
+            {
+                Children = {
+                    new Image { Source = "camera.png", WidthRequest = 24, HeightRequest = 24 },
+                   new Label { Text = "Camera"}
+                },
+                Orientation = StackOrientation.Horizontal,
+                Padding = 4,
+            };
+            photoButton.GestureRecognizers.Add(photoTap);
+
 
             Content = new StackLayout
             {
@@ -127,6 +143,13 @@ namespace xamarinApp
                     new Frame
                     {
                         Content = shareButton,
+                        BorderColor = Color.Gray,
+                        BackgroundColor = Color.FromHex("#e1e1e1"),
+                        CornerRadius = 12
+                    },
+                    new Frame
+                    {
+                        Content = photoButton,
                         BorderColor = Color.Gray,
                         BackgroundColor = Color.FromHex("#e1e1e1"),
                         CornerRadius = 12
