@@ -20,8 +20,10 @@ namespace xamarinApp
             database = new SQLiteAsyncConnection(dbPath);
             // wait until first query completed
             await database.CreateTableAsync<User>();
-            // then execute second create query
+
             await database.CreateTableAsync<Article>();
+            await database.CreateTableAsync<Source>();
+           
         }
 
 

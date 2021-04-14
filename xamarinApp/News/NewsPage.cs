@@ -5,6 +5,9 @@ using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Xamarin.Forms;
+using SQLite;
+using SQLiteNetExtensions.Attributes;
+using SQLitePCL;
 
 namespace xamarinApp
 {
@@ -54,6 +57,8 @@ namespace xamarinApp
 
 public class Article
 {
+
+    [OneToOne("articleId")]
     public Source source { get; set; }
     public string author { get; set; }
     public string title { get; set; }
@@ -62,7 +67,7 @@ public class Article
     public string urlToImage { get; set; }
     public string publishedAt { get; set; }
     public string content { get; set; }
-    [SQLite.PrimaryKey]
+    [PrimaryKey]
     public int id
     {
         get
@@ -78,8 +83,12 @@ public class Article
 
 public class Source
 {
+    [PrimaryKey, AutoIncrement]
+    public int identifier { get; set; }
     public string id { get; set; }
     public string name { get; set; }
+    [ForeignKey(typeof(Article))]
+    public int articleId { get; set;}
 }
 
 public class NewsCell : ViewCell

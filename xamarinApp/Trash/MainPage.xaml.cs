@@ -10,6 +10,7 @@ using System.Net;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using System.Windows.Input;
+using SQLite;
 
 namespace xamarinApp
 {
@@ -76,10 +77,11 @@ namespace xamarinApp
 
 }
 
+[Table("User")]
 public class User
 {
     public int userId { get; set; }
-    [SQLite.PrimaryKey]
+    [PrimaryKey]
     public int id { get; set; }
     public string title { get; set; }
     public string body { get; set; }
