@@ -28,6 +28,7 @@ namespace xamarinApp
             InitializeComponent();
       
             MainPage = new NavigationPage( new SettingsPage());
+            var _ = Database;
         }
 
         protected override void OnStart()

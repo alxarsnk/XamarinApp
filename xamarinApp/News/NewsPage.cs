@@ -19,6 +19,21 @@ namespace xamarinApp
         {
             Title = "News";
             makeRequest("https://newsapi.org/v2/top-headlines?country=ru&category=business&apiKey=59e4bf72cd8147c39800444c7a29aa27");
+            ToolbarItem item = new ToolbarItem
+            {
+                Text = "Saved",
+                Order = ToolbarItemOrder.Primary,
+                Priority = 0
+            };
+            item.Clicked += settingsCLicked;
+            this.ToolbarItems.Add(item);
+
+
+        }
+
+        public async void settingsCLicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SavedNews());
         }
 
         public async void OnItemTapped(object sender, ItemTappedEventArgs e)
@@ -96,7 +111,7 @@ public class NewsCell : ViewCell
     public NewsCell()
     {
         //instantiate each of our views
-        var image = new Image();
+        var image = new Image { WidthRequest = Application.Current.MainPage.Width - 64, HeightRequest = 250 };
         StackLayout horizontalLayout = new StackLayout();
         Label left = new Label();
         Label right = new Label();
@@ -105,7 +120,6 @@ public class NewsCell : ViewCell
         left.SetBinding(Label.TextProperty, "title");
         right.SetBinding(Label.TextProperty, "source.name");
         image.SetBinding(Image.SourceProperty, "urlToImage");
-        ForceUpdateSize();
         //Set properties for desired design
         horizontalLayout.Orientation = StackOrientation.Vertical;
         Frame frame = new Frame
@@ -125,5 +139,7 @@ public class NewsCell : ViewCell
         horizontalLayout.Children.Add(right);
         StackLayout stackLayout = new StackLayout() { Children = { frame }, Padding = 16 };
         View = stackLayout;
+        ForceUpdateSize();
     }
+
 }

@@ -7,6 +7,7 @@ namespace xamarinApp
     public class NewsDetail : ContentPage
     {
         Article article = new Article();
+
         ToolbarItem toolBarItem = new ToolbarItem
         {
             Text = "Add",
@@ -29,6 +30,13 @@ namespace xamarinApp
                 Console.WriteLine(e);
             }
 
+            var authorLabel = new Label { Text = (string)article.author };
+            var titleLabel = new Label { Text = (string)article.title };
+            var descLabel = new Label { Text = (string)article.description };
+            var content = new Label { Text = (string)article.content };
+            var publishedTImeLabel = new Label { Text = (string)article.publishedAt };
+            var urlLabel = new Label { Text = (string)article.url };
+
             ScrollView scrollView = new ScrollView
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
@@ -45,11 +53,12 @@ namespace xamarinApp
                     },
                     new Frame
                     {
-                        Content =new StackLayout
+                        Content = new StackLayout
                         {
                             Children = {
                                 new Label { Text = "Author: ", FontAttributes = FontAttributes.Bold },
-                                new Label { Text = article.author ?? "".ToString() }
+                                authorLabel
+
                             },
                         Orientation = StackOrientation.Horizontal,
                         Padding = 4
@@ -58,28 +67,28 @@ namespace xamarinApp
                         BackgroundColor = Color.FromHex("#e1e1e1"),
                         CornerRadius = 12
                     },
-                    new Frame
-                    {
-                        Content =new StackLayout
-                        {
-                            Children = {
-                                new Label { Text = "Source: ", FontAttributes = FontAttributes.Bold },
-                                new Label { Text = article.source.name ?? "".ToString() }
-                            },
-                        Orientation = StackOrientation.Horizontal,
-                        Padding = 4
-                       },
-                        BorderColor = Color.Gray,
-                        BackgroundColor = Color.FromHex("#e1e1e1"),
-                        CornerRadius = 12
-                    },
+                    //new Frame
+                    //{
+                    //    Content =new StackLayout
+                    //    {
+                    //        Children = {
+                    //            new Label { Text = "Source: ", FontAttributes = FontAttributes.Bold },
+                    //            articleSourceName
+                    //        },
+                    //    Orientation = StackOrientation.Horizontal,
+                    //    Padding = 4
+                    //   },
+                    //    BorderColor = Color.Gray,
+                    //    BackgroundColor = Color.FromHex("#e1e1e1"),
+                    //    CornerRadius = 12
+                    //},
                     new Frame
                     {
                         Content = new StackLayout
                         {
                             Children = {
                                 new Label { Text = "Title: ", FontAttributes = FontAttributes.Bold },
-                                new Label { Text = article.title ?? "".ToString() }
+                                titleLabel
                             },
                         Orientation = StackOrientation.Vertical,
                         Padding = 4
@@ -94,7 +103,7 @@ namespace xamarinApp
                         {
                             Children = {
                                 new Label { Text = "Description: ", FontAttributes = FontAttributes.Bold },
-                                new Label { Text = article.description ?? "".ToString() },
+                                descLabel
                             },
                             Orientation = StackOrientation.Vertical,
                             Padding = 4
@@ -109,7 +118,7 @@ namespace xamarinApp
                         {
                             Children = {
                                 new Label { Text = "Content: ", FontAttributes = FontAttributes.Bold },
-                                new Label { Text = article.content ?? "".ToString() },
+                                content
                             },
                             Orientation = StackOrientation.Vertical,
                             Padding = 4
@@ -124,7 +133,7 @@ namespace xamarinApp
                         {
                             Children = {
                                 new Label { Text = "Published: ", FontAttributes = FontAttributes.Bold },
-                                new Label { Text = article.publishedAt ?? "".ToString() },
+                                publishedTImeLabel
                             },
                             Orientation = StackOrientation.Vertical,
                             Padding = 4
@@ -139,7 +148,7 @@ namespace xamarinApp
                         {
                             Children = {
                                 new Label { Text = "URL: ", FontAttributes = FontAttributes.Bold },
-                                new Label { Text = article.url ?? "".ToString() },
+                                urlLabel
                             },
                             Orientation = StackOrientation.Vertical,
                             Padding = 4
