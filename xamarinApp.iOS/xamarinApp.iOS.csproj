@@ -121,6 +121,10 @@
     <ImageAsset Include="Assets.xcassets\temporary.png.imageset\29329-200-1.png" />
     <ImageAsset Include="Assets.xcassets\news.png.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\news.png.imageset\14711.png" />
+    <ImageAsset Include="Assets.xcassets\bluetooth.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\bluetooth.png.imageset\bluetooth.png" />
+    <ImageAsset Include="Assets.xcassets\share.png.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\share.png.imageset\button_share-512.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -147,5 +151,7 @@
     <Folder Include="Assets.xcassets\location.png.imageset\" />
     <Folder Include="Assets.xcassets\temporary.png.imageset\" />
     <Folder Include="Assets.xcassets\news.png.imageset\" />
+    <Folder Include="Assets.xcassets\bluetooth.png.imageset\" />
+    <Folder Include="Assets.xcassets\share.png.imageset\" />
   </ItemGroup>
 </Project>

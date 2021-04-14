@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace xamarinApp
@@ -59,6 +60,38 @@ namespace xamarinApp
             };
             newsButton.GestureRecognizers.Add(newsTap);
 
+            var bluetoothTap = new TapGestureRecognizer();
+            bluetoothTap.Tapped += (s, e) =>
+            {
+                Navigation.PushAsync(new BluetoothPageList());
+            };
+            var bluetoothButton = new StackLayout
+            {
+                Children = {
+                    new Image { Source = "bluetooth.png", WidthRequest = 24, HeightRequest = 24 },
+                   new Label { Text = "Bluetooth"}
+                },
+                Orientation = StackOrientation.Horizontal,
+                Padding = 4,
+            };
+            bluetoothButton.GestureRecognizers.Add(bluetoothTap);
+
+            var shareTap = new TapGestureRecognizer();
+            shareTap.Tapped += async (s, e) =>
+            {
+                await ShareUri("https://docs.microsoft.com/ru-ru/xamarin/essentials/share?tabs=android");
+            };
+            var shareButton = new StackLayout
+            {
+                Children = {
+                    new Image { Source = "share.png", WidthRequest = 24, HeightRequest = 24 },
+                   new Label { Text = "Share"}
+                },
+                Orientation = StackOrientation.Horizontal,
+                Padding = 4,
+            };
+            shareButton.GestureRecognizers.Add(shareTap);
+
 
             Content = new StackLayout
             {
@@ -83,10 +116,33 @@ namespace xamarinApp
                         BorderColor = Color.Gray,
                         BackgroundColor = Color.FromHex("#e1e1e1"),
                         CornerRadius = 12
+                    },
+                    new Frame
+                    {
+                        Content = bluetoothButton,
+                        BorderColor = Color.Gray,
+                        BackgroundColor = Color.FromHex("#e1e1e1"),
+                        CornerRadius = 12
+                    },
+                    new Frame
+                    {
+                        Content = shareButton,
+                        BorderColor = Color.Gray,
+                        BackgroundColor = Color.FromHex("#e1e1e1"),
+                        CornerRadius = 12
                     }
                 },
                 Padding = 16
             };
+        }
+
+        public async Task ShareUri(string uri)
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Uri = uri,
+                Title = "Share Web Link"
+            });
         }
     }
 }

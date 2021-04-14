@@ -20,6 +20,8 @@
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.5" />
     <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.osx" Version="1.1.14" />
     <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
+    <PackageReference Include="Plugin.BLE" Version="2.1.1" />
+    <PackageReference Include="Plugin.BluetoothLE" Version="6.3.0.19" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="News\" />
