@@ -17,6 +17,7 @@ namespace xamarinApp
     public partial class MainPage : ContentPage
     {
         public List<User> Users { get; set; }
+        ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true };
 
         public MainPage()
         {
@@ -33,7 +34,7 @@ namespace xamarinApp
             };
             item.Clicked += settingsCLicked;
             this.ToolbarItems.Add(item);
-
+            this.Content = new StackLayout { Children = { activityIndicator } };
 
         }
 
@@ -59,7 +60,7 @@ namespace xamarinApp
                 var json = await responseContent.ReadAsStringAsync();
                 ObservableCollection<User> list = JsonConvert.DeserializeObject<ObservableCollection<User>>(json);
                 Users = new List<User>(list);
-
+                activityIndicator.IsRunning = false;
                 ListView listView = new ListView
                 {
                     HasUnevenRows = true,

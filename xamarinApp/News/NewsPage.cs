@@ -14,6 +14,7 @@ namespace xamarinApp
     public class NewsPage : ContentPage
     {
         public List<Article> articles { get; set; }
+        ActivityIndicator activityIndicator = new ActivityIndicator { IsRunning = true };
 
         public NewsPage()
         {
@@ -27,7 +28,7 @@ namespace xamarinApp
             };
             item.Clicked += settingsCLicked;
             this.ToolbarItems.Add(item);
-
+            this.Content = new StackLayout { Children = { activityIndicator } };
 
         }
 
@@ -54,7 +55,7 @@ namespace xamarinApp
                 var fetchedArticles = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(json);
                 ObservableCollection<Article> list = JsonConvert.DeserializeObject<ObservableCollection<Article>>($"{fetchedArticles["articles"]}");
                 articles = new List<Article>(list);
-
+                activityIndicator.IsRunning = false;
                 ListView listView = new ListView
                 {
                     HasUnevenRows = true,

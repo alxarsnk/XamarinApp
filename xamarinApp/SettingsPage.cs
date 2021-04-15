@@ -107,7 +107,7 @@ namespace xamarinApp
                 Padding = 4,
             };
             photoButton.GestureRecognizers.Add(photoTap);
-
+         
 
             Content = new StackLayout
             {
@@ -153,7 +153,7 @@ namespace xamarinApp
                         BorderColor = Color.Gray,
                         BackgroundColor = Color.FromHex("#e1e1e1"),
                         CornerRadius = 12
-                    }
+                    },
                 },
                 Padding = 16
             };

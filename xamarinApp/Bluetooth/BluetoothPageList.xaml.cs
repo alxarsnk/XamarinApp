@@ -17,7 +17,10 @@ namespace xamarinApp
 
         public BluetoothPageList()
         {
+
             InitializeComponent();
+
+            Title = "Bluetoot";
             bluetoothBLE = CrossBluetoothLE.Current;
             adapter = CrossBluetoothLE.Current.Adapter;
 

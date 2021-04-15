@@ -22,9 +22,14 @@
     <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
     <PackageReference Include="Plugin.BLE" Version="2.1.1" />
     <PackageReference Include="Plugin.BluetoothLE" Version="6.3.0.19" />
+    <PackageReference Include="Microsoft.Exchange.WebServices" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="News\" />
     <Folder Include="Trash\" />
+    <Folder Include="Bluetooth\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="android Push.cs" />
   </ItemGroup>
 </Project>

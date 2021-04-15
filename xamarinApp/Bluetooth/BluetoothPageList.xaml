@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="xamarinApp.BluetoothPageList">
     <ContentPage.Content>
-        <StackLayout>
-            <Button Text="Search" Clicked="searchDevice"/>
+        <StackLayout Padding="16">
+            <Button Text="Search" Clicked="searchDevice" BackgroundColor="DarkGray" CornerRadius="12" FontSize="16" WidthRequest="140" HeightRequest="44" TextColor="Black"/>
             <ListView x:Name="DevicesList"
                       IsPullToRefreshEnabled="False"
                       CachingStrategy="RecycleElement"
